@@ -118,6 +118,45 @@ function check_appears_once(grid, chances, segment, r, c) {
 }
 
 
+function compare(expected, actual) {
+
+    let array1 = expected.slice()
+    let array2 = actual.slice()
+    let temp = array2.length && array1.sort().every(function (value, index) {
+        return value === array2.sort()[index]
+    })
+    return array1.length === temp;
+
+}
+
+
+function is_solved(grid) {
+
+    let expected = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let valid = true
+    for (r = 0; r < 9 && valid == true; r++) {
+        if (!compare(expected, horizontal(grid, r))) {
+            valid = false
+        }
+
+    }
+    for (c = 0; c < 9 && valid == true; c++) {
+        if (!compare(expected, vertical(grid, c))) {
+            valid = false
+        }
+
+
+    }
+
+    for (q = 1; q < 9 && valid == true; q++) {
+        if (!compare(expected, squareblock(grid, q))) {
+            valid = false;
+        }
+
+
+    }
+    return valid
+}
 
 
 
