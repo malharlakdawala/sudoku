@@ -85,10 +85,40 @@ function finish_cell(grid, r, c) {
 function check_appears_once(grid, chances, segment, r, c) {
 
     let updated = false;
-    for (i=0;i<chances.length;i++)
+    for (i = 0; i < chances.length; i++) {
+
+        let chance = chances[i]
+        let count = 0;
+
+        segment.forEach(cell => {
+
+            if (Array.isArray(cell)) {
+                if (cell.includes(chance)) {
+
+                    count++;
+                }
+            } else {
+                if (cell == chance) {
+                    count++;
+                }
+            }
 
 
+        })
+        if (count == 1) {
 
+            grid[r][c] = chance
+            updated = true
+            break
+        }
+
+    }
+
+    return updated
 }
+
+
+
+
 
 console.log(squareblock(input_sudoku, 3))
